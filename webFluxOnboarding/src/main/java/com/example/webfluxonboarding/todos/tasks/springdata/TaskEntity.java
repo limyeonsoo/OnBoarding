@@ -4,6 +4,7 @@ import com.example.webfluxonboarding.todos.tasks.TaskStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Table("TASKS")
@@ -12,4 +13,9 @@ record TaskEntity(
         String details,
         TaskStatus taskStatus
 ) {
+    TaskEntity {
+        Objects.requireNonNull(taskUuid);
+        Objects.requireNonNull(details);
+        Objects.requireNonNull(taskStatus);
+    }
 }
