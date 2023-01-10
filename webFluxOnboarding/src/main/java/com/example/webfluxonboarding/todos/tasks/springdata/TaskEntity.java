@@ -9,12 +9,12 @@ import java.util.UUID;
 
 @Table("TASKS")
 record TaskEntity(
-        @Id UUID taskUuid,
+        @Id UUID id,
         String details,
         TaskStatus taskStatus
 ) {
     TaskEntity {
-        Objects.requireNonNull(taskUuid);
+        Objects.requireNonNull(id);
         Objects.requireNonNull(details);
         Objects.requireNonNull(taskStatus);
     }

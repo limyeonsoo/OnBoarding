@@ -51,7 +51,7 @@ record TaskSpringDataService(
 
     private static Task toTask(final TaskEntity taskEntity) {
         return new Task(
-                taskEntity.taskUuid(),
+                taskEntity.id(),
                 taskEntity.details(),
                 taskEntity.taskStatus()
         );
