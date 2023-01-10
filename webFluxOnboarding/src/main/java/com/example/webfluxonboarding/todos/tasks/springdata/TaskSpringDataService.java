@@ -13,7 +13,7 @@ record TaskSpringDataService(
     @Override
     public Mono<Task> insert(
             final TaskAttributesInsert taskAttributesInsert) {
-        return taskSpringDataRepository.save(toEntity(taskAttributesInsert))
+        return taskSpringDataRepository.save(toEntity(taskAttributesInsert, true))
                 .map(TaskSpringDataService::toTask);
     }
 
@@ -57,11 +57,14 @@ record TaskSpringDataService(
         );
     }
 
-    private static TaskEntity toEntity(final TaskAttributesInsert taskAttributesInsert) {
+    private static TaskEntity toEntity(
+            final TaskAttributesInsert taskAttributesInsert,
+            final boolean isNewTask) {
         return new TaskEntity(
                 UUID.randomUUID(),
                 taskAttributesInsert.details(),
-                TaskStatus.ACTIVE
+                TaskStatus.ACTIVE,
+                isNewTask
         );
     }
 }
