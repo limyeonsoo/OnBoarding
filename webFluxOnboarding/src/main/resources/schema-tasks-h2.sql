@@ -3,6 +3,3 @@ CREATE TABLE IF NOT EXISTS TASKS (
     details VARCHAR(100) NOT NULL,
     task_status VARCHAR(100) NOT NULL
 );
-
-INSERT INTO TASKS(id, details, task_status)
-VALUES ('help', 'me', 'PLEASE');

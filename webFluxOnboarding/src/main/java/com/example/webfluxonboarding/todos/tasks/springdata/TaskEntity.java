@@ -10,21 +10,40 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Table("TASKS")
-record TaskEntity(
-        @Id UUID id,
-        String details,
-        TaskStatus taskStatus,
-        @Transient boolean isNewTask
-) implements Persistable<UUID> {
-    TaskEntity {
-        Objects.requireNonNull(id);
-        Objects.requireNonNull(details);
-        Objects.requireNonNull(taskStatus);
+class TaskEntity implements Persistable<UUID> {
+    @Id
+    UUID id;
+
+    String details;
+    TaskStatus taskStatus;
+    @Transient
+    boolean isNewTask;
+
+    protected TaskEntity() {
+    }
+
+    TaskEntity(
+            final UUID id,
+            final String details,
+            final TaskStatus taskStatus,
+            final boolean isNewTask) {
+        this.id = Objects.requireNonNull(id);
+        this.details = Objects.requireNonNull(details);
+        this.taskStatus = Objects.requireNonNull(taskStatus);
+        this.isNewTask = isNewTask;
     }
 
     @Override
     public UUID getId() {
         return id;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public TaskStatus getTaskStatus() {
+        return taskStatus;
     }
 
     @Override
