@@ -21,7 +21,8 @@ record TaskController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Mono<TaskIdResponse> create(final TaskCreateRequest request) {
+    Mono<TaskIdResponse> create(
+            @RequestBody final TaskCreateRequest request) {
         return taskService.insert(toTaskAttributesInsert(request))
                 .map(TaskController::toTaskIdResponse);
     }

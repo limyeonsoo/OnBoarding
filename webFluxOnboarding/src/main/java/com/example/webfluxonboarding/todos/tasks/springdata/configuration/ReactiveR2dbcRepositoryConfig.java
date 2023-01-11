@@ -5,9 +5,9 @@ import io.r2dbc.h2.H2ConnectionFactory;
 import io.r2dbc.h2.H2ConnectionOption;
 import io.r2dbc.spi.ConnectionFactory;
 import org.h2.tools.Server;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ClassPathResource;
@@ -23,6 +23,8 @@ import java.sql.SQLException;
 public class ReactiveR2dbcRepositoryConfig extends AbstractR2dbcConfiguration {
 
     @Override
+    @Bean("H2ConnectionFactory")
+    @Primary
     public ConnectionFactory connectionFactory() {
         return new H2ConnectionFactory(H2ConnectionConfiguration.builder()
                 .inMemory("TODOS")
