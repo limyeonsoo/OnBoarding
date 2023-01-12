@@ -79,5 +79,6 @@ export default {
   font-size: 16px;
   font-weight: 700;
   color: #FFFFFF;
+  white-space: nowrap;
 }
 </style>

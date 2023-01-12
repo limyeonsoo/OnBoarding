@@ -4,17 +4,20 @@
         :title="title"
         :month="month"
         :day="day"
-        :weekday="weekday"
-    ></top-bar>
+        :weekday="weekday">
+    </top-bar>
+    <main-page id="mainpage"></main-page>
   </div>
 </template>
 
 <script>
 import TopBar from "./components/TopBar.vue";
+import MainPage from "./components/MainPage.vue";
 
 export default {
   components: {
-    TopBar
+    TopBar,
+    MainPage
   },
   data() {
     return {
@@ -30,5 +33,9 @@ export default {
 <style scoped>
 #app {
   width: 100%;
+}
+#mainpage {
+  position: relative;
+  top: 48px;
 }
 </style>
