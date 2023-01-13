@@ -1,13 +1,9 @@
-<template>
-
-</template>
+<template></template>
 
 <script>
 export default {
-  name: "InputFieldOutline"
-}
+  name: 'InputFieldOutline',
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
