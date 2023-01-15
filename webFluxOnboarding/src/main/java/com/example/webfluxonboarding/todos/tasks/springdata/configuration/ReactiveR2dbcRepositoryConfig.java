@@ -24,7 +24,6 @@ public class ReactiveR2dbcRepositoryConfig extends AbstractR2dbcConfiguration {
 
     @Override
     @Bean("H2ConnectionFactory")
-    @Primary
     public ConnectionFactory connectionFactory() {
         return new H2ConnectionFactory(H2ConnectionConfiguration.builder()
                 .inMemory("TODOS")
