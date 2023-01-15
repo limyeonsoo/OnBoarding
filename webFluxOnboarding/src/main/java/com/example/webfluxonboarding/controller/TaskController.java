@@ -9,6 +9,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/tasks")
@@ -25,6 +26,14 @@ record TaskController(
             @RequestBody final TaskCreateRequest request) {
         return taskService.insert(toTaskAttributesInsert(request))
                 .map(TaskController::toTaskIdResponse);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    Mono<TaskResponse> retrieve(
+            @PathVariable String id) {
+        return taskService.select(UUID.fromString(id))
+                .map(TaskController::toTaskResponse);
     }
 
     @GetMapping

@@ -40,7 +40,8 @@ record TaskSpringDataService(
     @Override
     public Mono<Task> select(
             final UUID taskId) {
-        throw new RuntimeException("not implement");
+        return taskSpringDataRepository.findById(taskId.toString())
+                .map(TaskSpringDataService::toTask);
     }
 
     @Override
