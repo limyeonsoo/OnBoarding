@@ -4,6 +4,8 @@ import com.example.webfluxonboarding.todos.tasks.TaskService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.UUID;
+
 @Configuration
 class TaskServiceConfig {
 
@@ -12,7 +14,8 @@ class TaskServiceConfig {
             final TaskSpringDataRepository taskSpringDataRepository
     ) {
         return new TaskSpringDataService(
-                taskSpringDataRepository
+                taskSpringDataRepository,
+                UUID::randomUUID
         );
     }
 }

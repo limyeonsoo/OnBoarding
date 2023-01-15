@@ -5,9 +5,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
+import java.util.function.Supplier;
 
 record TaskSpringDataService(
-        TaskSpringDataRepository taskSpringDataRepository
+        TaskSpringDataRepository taskSpringDataRepository,
+        Supplier<UUID> uuidGenerator
 ) implements TaskService {
 
     @Override
@@ -58,11 +60,11 @@ record TaskSpringDataService(
         );
     }
 
-    private static TaskEntity toEntity(
+    private TaskEntity toEntity(
             final TaskAttributesInsert taskAttributesInsert,
             final boolean isNewTask) {
         return new TaskEntity(
-                UUID.randomUUID(),
+                uuidGenerator.get(),
                 taskAttributesInsert.details(),
                 TaskStatus.ACTIVE,
                 isNewTask
