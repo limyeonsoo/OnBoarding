@@ -1,6 +1,6 @@
 <template>
   <div class="input-field">
-    <input class="input-field__input" :placeholder="placeholder" v-model="value" ref="inputRef"/>
+    <input class="input-field__input" :placeholder="placeholder" v-model="value" ref="inputRef" />
     <div v-if="hasText" class="input-field__remove-icon" @click="onClickRemoveButton">
       <img src="../icons/RemoveButton.svg" alt="remove" />
     </div>
@@ -30,6 +30,11 @@ export default {
       return this.value !== '';
     },
   },
+  async created() {
+    await this.$nextTick(() => {
+      this.onFocusInput();
+    });
+  },
   methods: {
     onClickRemoveButton() {
       this.value = '';
@@ -38,6 +43,9 @@ export default {
     onClickSendButton() {
       if (!this.hasText) return;
       this.$emit('on-click-send-button');
+    },
+    onFocusInput() {
+      this.$refs.inputRef.focus();
     },
   },
 };

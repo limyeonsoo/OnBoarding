@@ -1,13 +1,11 @@
 <template>
-  <div> dd</div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: "ToDoPage"
-}
+  name: 'ToDoPage',
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

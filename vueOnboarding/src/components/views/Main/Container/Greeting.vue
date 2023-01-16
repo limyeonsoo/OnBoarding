@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import InputField from './input/InputField.vue';
+import InputField from '../../../input/InputField.vue';
 
 export default {
   name: 'Greeting',

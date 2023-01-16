@@ -6,20 +6,21 @@
 </template>
 
 <script>
-import Greeting from "./Greeting.vue";
-import ToDoPage from "./ToDoPage.vue";
+import Greeting from './Container/Greeting.vue';
+import ToDoPage from './Container/ToDoPage.vue';
+
 export default {
-  name: "MainPage",
+  name: 'MainPage',
   components: {
     ToDoPage,
-    Greeting
+    Greeting,
   },
   computed: {
     unKnownName() {
       return true;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -31,6 +32,5 @@ export default {
 .container-to-do-page {
   padding-left: 60px;
   padding-top: 16px;
-
 }
 </style>
