@@ -7,20 +7,24 @@
         class="greeting-question__input"
         placeholder="Input our name"
         @on-click-send-button="onClickSendButton"
+        @on-keydown-enter="onKeydownEnter"
       />
     </div>
   </div>
 </template>
 
 <script>
-import InputField from '../../../input/InputField.vue';
+import InputField from '../../../components/input/InputField.vue';
 
 export default {
   name: 'Greeting',
   components: { InputField },
   methods: {
-    onClickSendButton() {
-      console.log('click');
+    onClickSendButton(name) {
+      this.$emit('on-submit-my-name', name);
+    },
+    onKeydownEnter(name) {
+      this.$emit('on-submit-my-name', name);
     },
   },
 };
