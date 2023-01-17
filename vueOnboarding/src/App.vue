@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import TopBar from './views/TopBar/TopBar.vue';
-import MainPage from './views/Main/MainPage.vue';
+import TopBar from './components/views/TopBar/TopBar.vue';
+import MainPage from './components/views/Main/MainPage.vue';
 
 export default {
   components: {
