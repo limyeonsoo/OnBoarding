@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <greeting v-if="unKnownName" class="container-greeting"></greeting>
+    <greeting v-if="unKnownName" class="container-greeting" @on-submit-name="onSubmitName"></greeting>
     <to-do-page v-else class="container-to-do-page"></to-do-page>
   </div>
 </template>
@@ -8,6 +8,8 @@
 <script>
 import Greeting from './Container/Greeting.vue';
 import ToDoPage from './Container/ToDoPage.vue';
+import {  mapGetters } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'MainPage',
@@ -16,8 +18,15 @@ export default {
     Greeting,
   },
   computed: {
+    ...mapGetters(['name']),
     unKnownName() {
-      return true;
+      return this.name === '';
+    },
+  },
+  methods: {
+    ...mapMutations(['setName']),
+    onSubmitName(value) {
+      this.setName(value);
     },
   },
 };

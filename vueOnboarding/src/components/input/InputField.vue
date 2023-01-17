@@ -1,6 +1,12 @@
 <template>
   <div class="input-field">
-    <input class="input-field__input" :placeholder="placeholder" v-model="value" ref="inputRef" />
+    <input
+      class="input-field__input"
+      :placeholder="placeholder"
+      v-model="value"
+      ref="inputRef"
+      @keydown="onKeydownEnter"
+    />
     <div v-if="hasText" class="input-field__remove-icon" @click="onClickRemoveButton">
       <img src="../icons/RemoveButton.svg" alt="remove" />
     </div>
@@ -36,16 +42,25 @@ export default {
     });
   },
   methods: {
-    onClickRemoveButton() {
+    initValue() {
       this.value = '';
+    },
+    onClickRemoveButton() {
+      this.initValue();
+      this.$refs.inputRef.focus();
+    },
+    onFocusInput() {
       this.$refs.inputRef.focus();
     },
     onClickSendButton() {
       if (!this.hasText) return;
-      this.$emit('on-click-send-button');
+      this.$emit('on-click-send-button', this.value);
+      this.initValue();
     },
-    onFocusInput() {
-      this.$refs.inputRef.focus();
+    onKeydownEnter(event) {
+      if (event.key !== 'Enter') return;
+      this.$emit('on-keydown-enter', this.value);
+      this.initValue();
     },
   },
 };

@@ -7,7 +7,8 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
-    "vue": "^2.7.7"
+    "vue": "^2.7.7",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vitejs/plugin-legacy": "^2.0.0",

@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="wrapper-left">
       <div class="wrapper-left-menu">
-        <img src="../../icons/ic_topbar_menu.svg" alt="menu" />
+        <img src="../../components/icons/ic_topbar_menu.svg" alt="menu" />
       </div>
       <div class="wrapper-left-title">
         {{ title }}
