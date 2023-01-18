@@ -3,11 +3,14 @@ package com.sds.mvcOnboarding.controller;
 import com.sds.mvcOnboarding.service.TodoCreateAttributes;
 import com.sds.mvcOnboarding.service.TodoService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
 
-@RestController("/todos")
+@RestController
+@RequestMapping("/todos")
 class TodoController {
 
     private final TodoService todoService;
@@ -17,7 +20,7 @@ class TodoController {
     }
 
     @PostMapping
-    TaskIdResponse create(final TaskCreateRequest request) {
+    TaskIdResponse create(@RequestBody final TaskCreateRequest request) {
         final var todoCreateAttributes = new TodoCreateAttributes(
                 request.member_id(),
                 request.content()
