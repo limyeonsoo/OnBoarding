@@ -10,7 +10,7 @@ class TaskResponse {
     private final long create_date;
     private final long modify_date;
 
-    public TaskResponse(
+    TaskResponse(
             final int id,
             final int member_id,
             final String content,
@@ -24,5 +24,29 @@ class TaskResponse {
         this.status = Objects.requireNonNull(status);
         this.create_date = create_date;
         this.modify_date = modify_date;
+    }
+
+    int getId() {
+        return id;
+    }
+
+    int getMember_id() {
+        return member_id;
+    }
+
+    String getContent() {
+        return content;
+    }
+
+    String getStatus() {
+        return status;
+    }
+
+    long getCreate_date() {
+        return create_date;
+    }
+
+    long getModify_date() {
+        return modify_date;
     }
 }

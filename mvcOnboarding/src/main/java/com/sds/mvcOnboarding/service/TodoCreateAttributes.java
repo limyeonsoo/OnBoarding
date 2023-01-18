@@ -12,4 +12,12 @@ public class TodoCreateAttributes {
         this.member_id = member_id;
         this.content = Objects.requireNonNull(content);
     }
+
+    public int getMember_id() {
+        return member_id;
+    }
+
+    public String getContent() {
+        return content;
+    }
 }
