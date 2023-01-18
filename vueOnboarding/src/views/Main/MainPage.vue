@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <greeting v-if="unKnownName" class="container-greeting" @on-submit-my-name="onSubmitMyName"></greeting>
-    <to-do-page v-else class="container-to-do-page" :my-name="myName"></to-do-page>
+    <to-do-page v-else class="container-to-do-page" :greeting-time="timesOfTheDay" :my-name="myName"></to-do-page>
   </div>
 </template>
 
@@ -9,6 +9,7 @@
 import Greeting from './Container/Greeting.vue';
 import ToDoPage from './Container/ToDoPage.vue';
 import { getMyName, setMyName } from '../../common/session-storage';
+import { getThisIsTheMoment } from '../../common/thisMoment';
 
 export default {
   name: 'MainPage',
@@ -23,16 +24,21 @@ export default {
   },
   created() {
     this.myName = getMyName();
+    this.getTimesOfTheDay();
   },
   data() {
     return {
       myName: '',
+      timesOfTheDay: '',
     };
   },
   methods: {
     onSubmitMyName(myName) {
       setMyName(myName);
       this.myName = myName;
+    },
+    getTimesOfTheDay() {
+      Object.assign(this, getThisIsTheMoment());
     },
   },
 };

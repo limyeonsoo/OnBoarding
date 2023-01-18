@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { getThisIsTheMoment } from '../../common/thisMoment';
+
 export default {
   data() {
     return {
@@ -34,11 +36,7 @@ export default {
   },
   methods: {
     getToday() {
-      const dayOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      const today = new Date();
-      this.month = today.getMonth() + 1;
-      this.day = today.getDate();
-      this.weekday = dayOfWeek[today.getDay()].slice(0, 3);
+      Object.assign(this, getThisIsTheMoment());
     },
   },
 };

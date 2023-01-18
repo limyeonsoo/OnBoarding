@@ -14,14 +14,6 @@ export default {
     TopBar,
     MainPage,
   },
-  data() {
-    return {
-      title: 'My Todo',
-      month: 9,
-      day: 13,
-      weekday: 'Thu',
-    };
-  },
 };
 </script>
 
