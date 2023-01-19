@@ -10,4 +10,6 @@ public interface TodoService {
     Task retrieve(int id);
 
     List<Task> retrieveAll();
+
+    Task modify(TodoModifyAttributes attributes);
 }

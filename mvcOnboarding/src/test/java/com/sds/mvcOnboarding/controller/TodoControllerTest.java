@@ -2,6 +2,7 @@ package com.sds.mvcOnboarding.controller;
 
 import com.sds.mvcOnboarding.domain.Task;
 import com.sds.mvcOnboarding.service.TodoCreateAttributes;
+import com.sds.mvcOnboarding.service.TodoModifyAttributes;
 import com.sds.mvcOnboarding.service.TodoService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -112,5 +113,38 @@ class TodoControllerTest {
         assertEquals(task2.getMember_id(), actual.get(1).getMember_id());
 
         then(todoService).should(times(1)).retrieveAll();
+    }
+
+    @Test
+    void modify_content_and_status() {
+        // given
+        final var task = new Task(
+          123,
+                456,
+                "testContent",
+                "testStatus",
+                0L,
+                0L
+        );
+        given(todoService.modify(any())).willReturn(task);
+
+        // when
+        final var id = 1234;
+        final var request = new TaskModifyRequest("testContent", "testStatus");
+        final var actual = underTest.modify(id, request);
+
+        // then
+        assertEquals(task.getId(), actual.getId());
+        assertEquals(task.getMember_id(), actual.getMember_id());
+        assertEquals(task.getContent(), actual.getContent());
+        assertEquals(task.getStatus(), actual.getStatus());
+        assertEquals(task.getCreate_date(), actual.getCreate_date());
+        assertEquals(task.getModify_date(), actual.getModify_date());
+
+        final var todoModifyAttributesCaptor = ArgumentCaptor.forClass(TodoModifyAttributes.class);
+        then(todoService).should().modify(todoModifyAttributesCaptor.capture());
+        final var captorValue = todoModifyAttributesCaptor.getValue();
+        assertEquals(request.getContent(), captorValue.getContent());
+        assertEquals(request.getStatus(), captorValue.getStatus());
     }
 }
