@@ -12,4 +12,6 @@ public interface TodoService {
     List<Task> retrieveAll();
 
     Task modify(TodoModifyAttributes attributes);
+
+    void delete(int id);
 }

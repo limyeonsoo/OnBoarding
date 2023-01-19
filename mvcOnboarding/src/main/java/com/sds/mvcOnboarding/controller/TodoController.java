@@ -56,6 +56,12 @@ class TodoController {
         return toResponse(modifiedTask);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void delete(@PathVariable final int id) {
+        todoService.delete(id);
+    }
+
     static TaskIdResponse toTaskIdResponse(final int id) {
         return new TaskIdResponse(id);
     }

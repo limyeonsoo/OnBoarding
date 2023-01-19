@@ -28,4 +28,9 @@ public class TodoSpringDataService implements TodoService {
     public Task modify(final TodoModifyAttributes attributes) {
         throw new RuntimeException("not implement");
     }
+
+    @Override
+    public void delete(final int id) {
+        throw new RuntimeException("not implement");
+    }
 }

@@ -147,4 +147,16 @@ class TodoControllerTest {
         assertEquals(request.getContent(), captorValue.getContent());
         assertEquals(request.getStatus(), captorValue.getStatus());
     }
+
+    @Test
+    void delete() {
+        // given
+
+        // when
+        final var id = 1234;
+        underTest.delete(id);
+
+        // then
+        then(todoService).should().delete(id);
+    }
 }
