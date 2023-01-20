@@ -8,8 +8,9 @@
         @on-submit-task="onSubmitTask"
     >
     </summary-white-board>
-    <list-grey-board>
-
+    <list-grey-board
+      :tasks="tasks"
+    >
     </list-grey-board>
   </div>
 </template>
@@ -17,6 +18,7 @@
 <script>
 import SummaryWhiteBoard from './ToDo/SummaryWhiteBoard.vue';
 import ListGreyBoard from './ToDo/ListGreyBoard.vue';
+import { getTasks } from '../../../common/tasks.js';
 
 export default {
   name: 'ToDoPage',
@@ -39,9 +41,15 @@ export default {
       default: 0,
     },
   },
+  created() {
+    this.getTasks();
+  },
   methods: {
     onSubmitTask(value) {
       console.log(value);
+    },
+    getTasks() {
+      this.tasks = getTasks();
     }
   }
 };
