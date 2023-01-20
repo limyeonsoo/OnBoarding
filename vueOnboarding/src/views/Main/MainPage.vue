@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Greeting from './Container/Greeting.vue';
+import Greeting from './Container/GreetingPage.vue';
 import ToDoPage from './Container/ToDoPage.vue';
 import { getMyName, setMyName } from '../../common/session-storage';
 import { getThisIsTheMoment } from '../../common/thisMoment';
@@ -51,7 +51,5 @@ export default {
 }
 
 .container-to-do-page {
-  padding-left: 60px;
-  padding-top: 16px;
 }
 </style>

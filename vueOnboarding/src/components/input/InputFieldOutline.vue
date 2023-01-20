@@ -25,7 +25,7 @@ export default {
   props: {
     placeholder: {
       type: String,
-      default: '',
+      default: 'Enter your task',
     },
   },
   data() {

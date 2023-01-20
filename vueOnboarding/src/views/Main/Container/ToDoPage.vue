@@ -1,20 +1,26 @@
 <template>
   <div class="todolist">
-    <div class="todolist-notification">Good {{ greetingTime }}, {{ myName }}</div>
-    <div class="todolist-status">
-      <div class="todolist-status__letter">You've got</div>
-      <div class="todolist-status__count">{{ currentTodo }} / {{ totalTodo }}</div>
-    </div>
-    <input-field-outline class="todolist-input"></input-field-outline>
+    <summary-white-board
+        :greeting-time="greetingTime"
+        :my-name="myName"
+        :current-todo="currentTodo"
+        :total-todo="totalTodo"
+        @on-submit-task="onSubmitTask"
+    >
+    </summary-white-board>
+    <list-grey-board>
+
+    </list-grey-board>
   </div>
 </template>
 
 <script>
-import InputFieldOutline from '../../../components/input/InputFieldOutline.vue';
+import SummaryWhiteBoard from './ToDo/SummaryWhiteBoard.vue';
+import ListGreyBoard from './ToDo/ListGreyBoard.vue';
 
 export default {
   name: 'ToDoPage',
-  components: {InputFieldOutline},
+  components: {SummaryWhiteBoard, ListGreyBoard},
   props: {
     greetingTime: {
       type: String,
@@ -33,43 +39,14 @@ export default {
       default: 0,
     },
   },
+  methods: {
+    onSubmitTask(value) {
+      console.log(value);
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 
-.todolist {
-  &-notification {
-    font-size: 28px;
-    font-weight: 400;
-    color: #2c3e50;
-    margin-bottom: 16px;
-  }
-
-  &-status {
-    display: flex;
-    flex-direction: column;
-
-    &__letter {
-      font-size: 28px;
-      font-weight: 400;
-      color: #2c3e50;
-    }
-
-    &__count {
-      font-size: 48px;
-      font-weight: 700;
-      color: #2c3e50;
-    }
-  }
-
-  &-input {
-    width: 1160px;
-    height: 48px;
-  }
-}
-
-.todolist-notification {
-
-}
 </style>
