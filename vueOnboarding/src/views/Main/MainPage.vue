@@ -33,7 +33,7 @@ export default {
     };
   },
   methods: {
-    onSubmitMyName(myName) {
+    async onSubmitMyName(myName) {
       setMyName(myName);
       this.myName = myName;
     },
