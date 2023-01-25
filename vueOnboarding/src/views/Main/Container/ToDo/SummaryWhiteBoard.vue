@@ -3,7 +3,7 @@
     <div class="todo-summary-notification">Good {{ greetingTime }}, {{ myName }}</div>
     <div class="todo-summary-status">
       <div class="todo-summary-status__letter">You've got</div>
-      <div class="todo-summary-status__count">{{ currentTodo }} / {{ totalTodo }}</div>
+      <div class="todo-summary-status__count">{{ doneTodo }} / {{ totalTodo }}</div>
     </div>
     <div class="todo-summary-tasks">
       <div class="todo-summary-tasks__letter">task Today!</div>
@@ -31,7 +31,7 @@ export default {
       type: String,
       required: true,
     },
-    currentTodo: {
+    doneTodo: {
       type: Number,
       default: 0,
     },

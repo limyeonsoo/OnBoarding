@@ -3,13 +3,13 @@
     <summary-white-board
         :greeting-time="greetingTime"
         :my-name="myName"
-        :current-todo="currentTodo"
+        :done-todo="doneTodo"
         :total-todo="totalTodo"
         @on-submit-task="onSubmitTask"
     >
     </summary-white-board>
     <list-grey-board
-      :tasks="tasks"
+        :tasks="tasks"
     >
     </list-grey-board>
   </div>
@@ -18,7 +18,7 @@
 <script>
 import SummaryWhiteBoard from './ToDo/SummaryWhiteBoard.vue';
 import ListGreyBoard from './ToDo/ListGreyBoard.vue';
-import { getTasks } from '../../../common/tasks.js';
+import {getTasks, postTask} from '../../../common/tasks.js';
 
 export default {
   name: 'ToDoPage',
@@ -32,30 +32,31 @@ export default {
       type: String,
       required: true,
     },
-    currentTodo: {
-      type: Number,
-      default: 0,
-    },
-    totalTodo: {
-      type: Number,
-      default: 0,
-    },
   },
   data() {
     return {
       tasks: []
     }
   },
+  computed: {
+    totalTodo() {
+      return this.tasks.length;
+    },
+    doneTodo() {
+      return this.tasks.filter(it => it.status === 'DONE').length;
+    }
+  },
   created() {
     this.getTasks();
   },
   methods: {
-    onSubmitTask(value) {
-      console.log(value);
-    },
     async getTasks() {
-      this.tasks =  await getTasks();
-    }
+      this.tasks = await getTasks();
+    },
+    async onSubmitTask(value) {
+      await postTask(value)
+      await this.getTasks();
+    },
   }
 };
 </script>
