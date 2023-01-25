@@ -41,6 +41,11 @@ export default {
       default: 0,
     },
   },
+  data() {
+    return {
+      tasks: []
+    }
+  },
   created() {
     this.getTasks();
   },
@@ -48,8 +53,8 @@ export default {
     onSubmitTask(value) {
       console.log(value);
     },
-    getTasks() {
-      this.tasks = getTasks();
+    async getTasks() {
+      this.tasks =  await getTasks();
     }
   }
 };
