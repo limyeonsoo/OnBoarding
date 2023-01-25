@@ -10,6 +10,7 @@
     </summary-white-board>
     <list-grey-board
         :tasks="tasks"
+        @on-click-check-button="onClickCheckButton"
     >
     </list-grey-board>
   </div>
@@ -18,7 +19,7 @@
 <script>
 import SummaryWhiteBoard from './ToDo/SummaryWhiteBoard.vue';
 import ListGreyBoard from './ToDo/ListGreyBoard.vue';
-import {getTasks, postTask} from '../../../common/tasks.js';
+import {getTasks, postTask, patchStatus} from '../../../common/tasks.js';
 
 export default {
   name: 'ToDoPage',
@@ -55,6 +56,11 @@ export default {
     },
     async onSubmitTask(value) {
       await postTask(value)
+      await this.getTasks();
+    },
+    async onClickCheckButton(value) {
+      const newStatus = value.isChecked ? 'DONE' : 'ACTIVE';
+      await patchStatus(value.id, newStatus);
       await this.getTasks();
     },
   }

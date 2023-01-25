@@ -14,3 +14,10 @@ export const postTask = async (value) => {
     })
     return id;
 }
+
+export const patchStatus = async (id, status) => {
+    const tasks = await HTTP.patch(host + '/todos' + `/${id}`, {
+        status: status
+    });
+    console.log(tasks);
+}
