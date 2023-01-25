@@ -36,7 +36,7 @@ class TaskEntity {
         );
     }
 
-    TaskEntity(
+    public TaskEntity(
             Integer id,
             Integer member_id,
             String content,

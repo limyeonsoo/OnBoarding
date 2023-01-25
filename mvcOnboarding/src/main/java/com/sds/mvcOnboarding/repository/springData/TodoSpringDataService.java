@@ -46,7 +46,21 @@ class TodoSpringDataService implements TodoService {
 
     @Override
     public Task modify(final TodoModifyAttributes attributes) {
-        throw new RuntimeException("not implement");
+        final var now = clock.instant();
+        final var asIs = taskRepository.findById(attributes.getId());
+
+        if (asIs.isEmpty()) {
+            throw new RuntimeException("invalid id");
+        }
+        final var toBe = new TaskEntity(
+                asIs.get().getId(),
+                asIs.get().getMember_id(),
+                Objects.requireNonNullElse(attributes.getContent(), asIs.get().getContent()),
+                Objects.requireNonNullElse(attributes.getStatus(), asIs.get().getStatus()),
+                asIs.get().getCreate_date(),
+                now.getEpochSecond()
+        );
+        return fromEntity(taskRepository.save(toBe));
     }
 
     @Override
