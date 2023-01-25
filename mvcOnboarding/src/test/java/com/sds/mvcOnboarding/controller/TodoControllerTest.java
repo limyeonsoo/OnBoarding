@@ -1,6 +1,7 @@
 package com.sds.mvcOnboarding.controller;
 
 import com.sds.mvcOnboarding.domain.Task;
+import com.sds.mvcOnboarding.domain.TaskStatus;
 import com.sds.mvcOnboarding.service.TodoCreateAttributes;
 import com.sds.mvcOnboarding.service.TodoModifyAttributes;
 import com.sds.mvcOnboarding.service.TodoService;
@@ -61,7 +62,7 @@ class TodoControllerTest {
                 1,
                 2,
                 "testContent",
-                "testStatus",
+                TaskStatus.ACTIVE,
                 -1,
                 -1
         );
@@ -75,7 +76,7 @@ class TodoControllerTest {
         assertEquals(task.getId(), actual.getId());
         assertEquals(task.getMember_id(), actual.getMember_id());
         assertEquals(task.getContent(), actual.getContent());
-        assertEquals(task.getStatus(), actual.getStatus());
+        assertEquals(task.getStatus().name(), actual.getStatus());
         assertEquals(task.getCreate_date(), actual.getCreate_date());
         assertEquals(task.getModify_date(), actual.getModify_date());
 
@@ -89,7 +90,7 @@ class TodoControllerTest {
                 1,
                 2,
                 "testContent",
-                "testStatus",
+                TaskStatus.ACTIVE,
                 -1,
                 -1
         );
@@ -97,7 +98,7 @@ class TodoControllerTest {
                 2,
                 3,
                 "testContent1",
-                "testStatus1",
+                TaskStatus.ACTIVE,
                 -11,
                 -11
         );
@@ -122,7 +123,7 @@ class TodoControllerTest {
           123,
                 456,
                 "testContent",
-                "testStatus",
+                TaskStatus.ACTIVE,
                 0L,
                 0L
         );
@@ -137,7 +138,7 @@ class TodoControllerTest {
         assertEquals(task.getId(), actual.getId());
         assertEquals(task.getMember_id(), actual.getMember_id());
         assertEquals(task.getContent(), actual.getContent());
-        assertEquals(task.getStatus(), actual.getStatus());
+        assertEquals(task.getStatus().name(), actual.getStatus());
         assertEquals(task.getCreate_date(), actual.getCreate_date());
         assertEquals(task.getModify_date(), actual.getModify_date());
 

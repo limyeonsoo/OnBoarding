@@ -52,9 +52,6 @@ class TodoController {
     TaskResponse modify(
             @PathVariable final int id,
             @RequestBody final TaskModifyRequest request) {
-        System.out.println(id);
-        System.out.println(request.getContent());
-        System.out.println(request.getStatus());
         final var modifiedTask = todoService.modify(fromIdAndRequest(id, request));
         return toResponse(modifiedTask);
     }
