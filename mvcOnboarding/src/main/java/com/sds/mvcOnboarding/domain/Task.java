@@ -6,7 +6,7 @@ public class Task {
     private final int id;
     private final int member_id;
     private final String content;
-    private final String status;
+    private final TaskStatus status;
     private final long create_date;
     private final long modify_date;
 
@@ -14,7 +14,7 @@ public class Task {
             int id,
             int member_id,
             String content,
-            String status,
+            TaskStatus status,
             long create_date,
             long modify_date
     ) {
@@ -38,7 +38,7 @@ public class Task {
         return content;
     }
 
-    public String getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 

@@ -1,8 +1,6 @@
 package com.sds.mvcOnboarding.repository;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +9,7 @@ public
 class TaskEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Integer member_id;
     private String content;
@@ -21,6 +20,22 @@ class TaskEntity {
     protected TaskEntity() {
     }
 
+    public TaskEntity(
+            Integer member_id,
+            String content,
+            String status,
+            Long create_date,
+            Long modify_date
+    ) {
+        this(null,
+                member_id,
+                content,
+                status,
+                create_date,
+                modify_date
+        );
+    }
+
     TaskEntity(
             Integer id,
             Integer member_id,
@@ -29,7 +44,7 @@ class TaskEntity {
             Long create_date,
             Long modify_date
     ) {
-        this.id = Objects.requireNonNull(id);
+        this.id = id;
         this.member_id = Objects.requireNonNull(member_id);
         this.content = Objects.requireNonNull(content);
         this.status = Objects.requireNonNull(status);

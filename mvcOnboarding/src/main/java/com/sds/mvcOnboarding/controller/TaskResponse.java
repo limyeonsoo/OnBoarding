@@ -26,27 +26,27 @@ class TaskResponse {
         this.modify_date = modify_date;
     }
 
-    int getId() {
+    public int getId() {
         return id;
     }
 
-    int getMember_id() {
+    public int getMember_id() {
         return member_id;
     }
 
-    String getContent() {
+    public String getContent() {
         return content;
     }
 
-    String getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    long getCreate_date() {
+    public long getCreate_date() {
         return create_date;
     }
 
-    long getModify_date() {
+    public long getModify_date() {
         return modify_date;
     }
 }

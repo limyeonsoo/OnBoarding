@@ -71,7 +71,7 @@ class TodoController {
                 task.getId(),
                 task.getMember_id(),
                 task.getContent(),
-                task.getStatus(),
+                task.getStatus().name(),
                 task.getCreate_date(),
                 task.getModify_date()
         );

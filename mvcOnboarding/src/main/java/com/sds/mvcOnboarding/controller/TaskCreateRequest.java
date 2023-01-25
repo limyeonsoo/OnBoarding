@@ -9,7 +9,7 @@ class TaskCreateRequest {
     public TaskCreateRequest(
             final int member_id,
             final String content) {
-        this.member_id = Objects.requireNonNull(member_id);
+        this.member_id = member_id;
         this.content = Objects.requireNonNull(content);
     }
 
