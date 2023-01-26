@@ -13,6 +13,8 @@
         class="todolist__list"
         :tasks="tasks"
         @on-click-check-button="onClickCheckButton"
+        @on-patch-content="onPatchContent"
+        @on-click-remove-button="onClickRemoveButton"
     >
     </list-grey-board>
   </div>
@@ -21,7 +23,7 @@
 <script>
 import SummaryWhiteBoard from './ToDo/SummaryWhiteBoard.vue';
 import ListGreyBoard from './ToDo/ListGreyBoard.vue';
-import {getTasks, postTask, patchStatus} from '../../../common/tasks.js';
+import {getTasks, postTask, patchStatus, patchContent, deleteTask} from '../../../common/tasks.js';
 
 export default {
   name: 'ToDoPage',
@@ -47,7 +49,7 @@ export default {
     },
     doneTodo() {
       return this.tasks.filter(it => it.status === 'DONE').length;
-    }
+    },
   },
   created() {
     this.getTasks();
@@ -61,10 +63,17 @@ export default {
       await this.getTasks();
     },
     async onClickCheckButton(value) {
-      const newStatus = value.isChecked ? 'DONE' : 'ACTIVE';
-      await patchStatus(value.id, newStatus);
+      await patchStatus(value.id, value.status);
       await this.getTasks();
     },
+    async onPatchContent(value) {
+      await patchContent(value.id, value.content);
+      await this.getTasks();
+    },
+    async onClickRemoveButton(id) {
+      await deleteTask(id);
+      await this.getTasks();
+    }
   }
 };
 </script>

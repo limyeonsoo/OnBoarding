@@ -2,7 +2,7 @@
   <div class="input-field-outline">
     <div class="input-field-outline__container">
       <div v-if="isFocused" class="input-field-outline__container__checkbox">
-        <img v-if="isChecked" class="input-field-outline__container__checkbox-selected"
+        <img v-if="isDone" class="input-field-outline__container__checkbox-selected"
              src="../icons/selected.png"
              @click="onClickCheckButton" alt="selected"/>
         <img v-else class="input-field-outline__container__checkbox-not-selected"
@@ -11,6 +11,7 @@
       </div>
       <input
           class="input-field-outline__container__input"
+          :class="{ status }"
           :placeholder="placeholder"
           v-model="value"
           ref="inputRef"
@@ -19,7 +20,7 @@
           @focusout="onFocusOut"
       />
       <div class="input-field-outline__container__function">
-        <div v-if="!hasText && isFocused" class="input-field-outline__container__function-wrapper">
+        <div v-if="isFocused" class="input-field-outline__container__function-wrapper">
           <span class="input-field-outline__container__function-wrapper__date">{{ month }}/{{ day }}</span>
           <img class="input-field-outline__container__function-wrapper__button" src="../icons/btn_remove.png"
                alt="remove-button"
@@ -27,7 +28,7 @@
         </div>
         <img v-else class="input-field-outline__container__function-blue" src="../icons/SendBlue.svg"
              alt="send-button"
-             @click="onClickSendButton"/>
+        />
       </div>
     </div>
 
@@ -40,6 +41,14 @@ export default {
   props: {
     id: {
       type: Number,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
       required: true,
     },
     month: {
@@ -66,32 +75,35 @@ export default {
     };
   },
   computed: {
-    hasText() {
-      return this.value !== '';
-    },
+    isDone() {
+      return this.status === 'DONE';
+    }
+  },
+  created() {
+    this.value = this.content;
   },
   methods: {
     initValue() {
       this.value = '';
     },
-    onClickRemoveButton() {
-      this.initValue();
-      this.$refs.inputRef.focus();
+    initFocus() {
+      this.$refs.inputRef.blur();
     },
-    onClickSendButton() {
-      if (!this.hasText) return;
-      this.$emit('on-click-send-button', this.value);
-      this.initValue();
+    onClickRemoveButton() {
+      this.$emit('on-click-remove-button', this.id);
     },
     onKeydownEnter(event) {
       if (event.key !== 'Enter') return;
-      this.$emit('on-keydown-enter', this.value);
-      this.initValue();
+      this.$emit('on-keydown-enter', {
+        'id': this.id,
+        'content': this.value
+      });
+      this.initFocus();
     },
     onClickCheckButton() {
       this.$emit('on-click-check-button', {
-        isChecked: !this.isChecked,
-        id: this.id
+        'status': this.isDone ? 'ACTIVE' : 'DONE',
+        'id': this.id
       });
     },
     onFocus() {
@@ -99,6 +111,11 @@ export default {
     },
     onFocusOut() {
       this.isFocused = true;
+      this.$emit('on-focus-out', {
+        'id': this.id,
+        'content': this.value
+      });
+      this.initFocus();
     }
   }
 };
@@ -134,11 +151,17 @@ export default {
       padding: 0;
       font-size: 24px;
       flex-grow: 1;
+
       &:focus {
         outline: none;
+
         &::placeholder {
           color: transparent;
         }
+      }
+
+      & .DONE {
+        text-decoration-line: line-through;
       }
     }
 
@@ -148,6 +171,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         &__date {
           width: 26px;
           size: 12px;
@@ -155,6 +179,7 @@ export default {
           opacity: 0.6;
         }
       }
+
       &-blue {
         display: flex;
         align-items: center;

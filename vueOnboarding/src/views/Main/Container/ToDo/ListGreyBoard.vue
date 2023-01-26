@@ -14,12 +14,19 @@
     <div class="todo-list__tasks">
       <input-field-in-arrow v-for="task in tasks" :key="task.id"
                             :id="task.id"
+                            :content="task.content"
+                            :status="task.status"
                             day="14"
                             month="9"
                             class="todo-list__tasks-each"
                             @on-click-check-button="onClickCheckButton"
+                            @on-keydown-enter="onPatchContent"
+                            @on-focus-out="onPatchContent"
+                            @on-click-remove-button="onClickRemoveButton"
       >
       </input-field-in-arrow>
+    </div>
+    <div>
     </div>
   </div>
 </template>
@@ -39,6 +46,12 @@ export default {
   methods: {
     onClickCheckButton(value) {
       this.$emit('on-click-check-button', value);
+    },
+    onPatchContent(value) {
+      this.$emit('on-patch-content', value);
+    },
+    onClickRemoveButton(id) {
+      this.$emit('on-click-remove-button', id);
     }
   }
 }
@@ -72,7 +85,6 @@ export default {
       }
 
       & option {
-
         &:checked {
           background-color: rgba(42, 130, 250, 0.1);
           color: #2A82F0;
@@ -88,6 +100,7 @@ export default {
   }
 
   &__tasks {
+
     &-each {
       height: 68px;
     }

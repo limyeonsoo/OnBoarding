@@ -16,8 +16,19 @@ export const postTask = async (value) => {
 }
 
 export const patchStatus = async (id, status) => {
-    const tasks = await HTTP.patch(host + '/todos' + `/${id}`, {
+    await HTTP.patch(host + '/todos' + `/${id}`, {
         status: status
     });
-    console.log(tasks);
+}
+
+export const patchContent = async (id, content) => {
+    await HTTP.patch(host + '/todos' + `/${id}`, {
+        content: content
+    });
+}
+
+export const deleteTask = async (id) => {
+    await HTTP.delete(host + '/todos' + `/${id}`, {
+        id: id
+    })
 }
