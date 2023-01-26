@@ -14,6 +14,8 @@
     <div class="todo-list__tasks">
       <input-field-in-arrow v-for="task in tasks" :key="task.id"
                             :id="task.id"
+                            day="14"
+                            month="9"
                             class="todo-list__tasks-each"
                             @on-click-check-button="onClickCheckButton"
       >
@@ -46,7 +48,6 @@ export default {
 .todo-list {
   background-color: rgba(242, 242, 242, 1);
   padding: 24px 60px;
-
   &__function-area {
     display: flex;
     justify-content: space-between;

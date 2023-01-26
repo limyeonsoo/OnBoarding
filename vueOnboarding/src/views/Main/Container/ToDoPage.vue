@@ -1,6 +1,7 @@
 <template>
   <div class="todolist">
     <summary-white-board
+        class="todolist__summary"
         :greeting-time="greetingTime"
         :my-name="myName"
         :done-todo="doneTodo"
@@ -9,6 +10,7 @@
     >
     </summary-white-board>
     <list-grey-board
+        class="todolist__list"
         :tasks="tasks"
         @on-click-check-button="onClickCheckButton"
     >
@@ -68,5 +70,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.todolist {
+  height: 100%;
+  background-color: rgb(242, 242, 242);
+  &__summary {
+    height: 324px;
+  }
+}
 </style>

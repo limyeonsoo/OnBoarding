@@ -51,10 +51,7 @@ export default {
 <style lang="scss" scoped>
 .todo-summary {
   background-color: rgba(255, 255, 255, 1);
-  padding-left: 60px;
-  padding-top: 16px;
-  padding-bottom: 40px;
-
+  padding: 16px 60px 40px;
   &-notification {
     font-size: 28px;
     font-weight: 400;
@@ -88,7 +85,6 @@ export default {
     }
 
     &__input {
-      width: 1160px;
       height: 48px;
     }
   }

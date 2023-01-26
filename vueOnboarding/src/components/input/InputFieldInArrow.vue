@@ -19,9 +19,12 @@
           @focusout="onFocusOut"
       />
       <div class="input-field-outline__container__function">
-        <img v-if="!hasText" class="input-field-outline__container__function-red" src="../icons/btn_remove.png"
-             alt="remove-button"
-             @click="onClickRemoveButton"/>
+        <div v-if="!hasText && isFocused" class="input-field-outline__container__function-wrapper">
+          <span class="input-field-outline__container__function-wrapper__date">{{ month }}/{{ day }}</span>
+          <img class="input-field-outline__container__function-wrapper__button" src="../icons/btn_remove.png"
+               alt="remove-button"
+               @click="onClickRemoveButton"/>
+        </div>
         <img v-else class="input-field-outline__container__function-blue" src="../icons/SendBlue.svg"
              alt="send-button"
              @click="onClickSendButton"/>
@@ -37,6 +40,14 @@ export default {
   props: {
     id: {
       type: Number,
+      required: true,
+    },
+    month: {
+      type: String,
+      required: true,
+    },
+    day: {
+      type: String,
       required: true,
     },
     placeholder: {
@@ -95,56 +106,64 @@ export default {
 
 <style lang="scss" scoped>
 
-.input-field-outline__container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
+.input-field-outline {
   padding-bottom: 8px;
-  background-color: #ffffff;
-  padding-left: 16px;
 
-  &__checkbox {
-    width: 34.5px;
-    height: 28px;
+  &__container {
+    width: 100%;
+    height: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding-left: 6.5px;
-    padding-right: 18px;
-  }
+    background-color: #ffffff;
+    padding: 0 16px;
 
-  &__input {
-    //width: 100%;
-    height: 24px;
-    border: none;
-    //border-radius: 4px;
-    padding: 0 16px 0 0;
-    //font-weight: 400;
-    font-size: 24px;
-    //
-    &:focus {
-      outline: none;
+    &__checkbox {
+      width: 34.5px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      padding-left: 6.5px;
+      padding-right: 18px;
+    }
 
-      &::placeholder {
-        color: transparent;
+    &__input {
+      min-width: calc(100% - 50.5px - 82px);
+      height: 24px;
+      border: none;
+      padding: 0;
+      font-size: 24px;
+      flex-grow: 1;
+      &:focus {
+        outline: none;
+        &::placeholder {
+          color: transparent;
+        }
+      }
+    }
+
+    &__function {
+      &-wrapper {
+        width: 82px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__date {
+          width: 26px;
+          size: 12px;
+          line-height: 28px;
+          opacity: 0.6;
+        }
+      }
+      &-blue {
+        display: flex;
+        align-items: center;
+        width: 40px;
+        padding-left: 12px;
+        height: 28px;
       }
     }
   }
-
-  &__function {
-    width: 28px;
-    height: 28px;
-  }
-
-  //& img {
-  //  height: 17.28px;
-  //  width: 15.84px;
-  //}
-  //
-  //&-blue:hover {
-  //  cursor: pointer;
-  //}
-
 }
 
 

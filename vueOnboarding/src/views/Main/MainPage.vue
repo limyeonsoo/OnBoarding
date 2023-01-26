@@ -51,5 +51,6 @@ export default {
 }
 
 .container-to-do-page {
+  height: calc(100vh - 48px);
 }
 </style>
