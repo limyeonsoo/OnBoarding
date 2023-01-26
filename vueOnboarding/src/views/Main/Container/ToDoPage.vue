@@ -15,6 +15,7 @@
         @on-click-check-button="onClickCheckButton"
         @on-patch-content="onPatchContent"
         @on-click-remove-button="onClickRemoveButton"
+        @on-click-clear-all-button="onClickClearAllButton"
     >
     </list-grey-board>
   </div>
@@ -23,7 +24,7 @@
 <script>
 import SummaryWhiteBoard from './ToDo/SummaryWhiteBoard.vue';
 import ListGreyBoard from './ToDo/ListGreyBoard.vue';
-import {getTasks, postTask, patchStatus, patchContent, deleteTask} from '../../../common/tasks.js';
+import {deleteTask, getTasks, patchContent, patchStatus, postTask} from '../../../common/tasks.js';
 
 export default {
   name: 'ToDoPage',
@@ -73,6 +74,12 @@ export default {
     async onClickRemoveButton(id) {
       await deleteTask(id);
       await this.getTasks();
+    },
+    async onClickClearAllButton() {
+      await Promise.all(
+          this.tasks.map(task => deleteTask(task.id))
+      )
+      await this.getTasks();
     }
   }
 };
@@ -82,6 +89,7 @@ export default {
 .todolist {
   height: 100%;
   background-color: rgb(242, 242, 242);
+
   &__summary {
     height: 324px;
   }

@@ -12,6 +12,7 @@
       <input
           class="input-field-outline__container__input"
           :class="{ status }"
+          :disabled="isDone"
           :placeholder="placeholder"
           v-model="value"
           ref="inputRef"
@@ -159,6 +160,13 @@ export default {
           color: transparent;
         }
       }
+      &:disabled {
+        background-color: #fff;
+        color: black;
+        pointer-events: none;
+        user-select: none;
+
+      }
 
       & .DONE {
         text-decoration-line: line-through;
@@ -178,6 +186,9 @@ export default {
           line-height: 28px;
           opacity: 0.6;
         }
+        &__button {
+          cursor: pointer;
+        }
       }
 
       &-blue {
@@ -186,6 +197,7 @@ export default {
         width: 40px;
         padding-left: 12px;
         height: 28px;
+        cursor: pointer;
       }
     }
   }

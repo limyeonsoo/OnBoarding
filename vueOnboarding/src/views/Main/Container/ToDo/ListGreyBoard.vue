@@ -1,16 +1,22 @@
 <template>
   <div class="todo-list">
-    <div class="todo-list__function-area">
+    <div v-if="!isEmpty" class="todo-list__function-area">
       <div class="todo-list__function-area__sorting">
-        <select name="sorting">
+        <select name="sorting"
+                ref="selectBox"
+                @change="onClickOption"
+        >
           <option value=1>Oldest</option>
           <option value=2>Latest</option>
         </select>
       </div>
-      <div class="todo-list__function-area__clear">
-        ClearAll
+      <div class="todo-list__function-area__clear"
+           @click="onClickClearAllButton"
+      >
+        Clear All
       </div>
     </div>
+    <div v-else>There is no tasks!</div>
     <div class="todo-list__tasks">
       <input-field-in-arrow v-for="task in tasks" :key="task.id"
                             :id="task.id"
@@ -25,8 +31,6 @@
                             @on-click-remove-button="onClickRemoveButton"
       >
       </input-field-in-arrow>
-    </div>
-    <div>
     </div>
   </div>
 </template>
@@ -52,6 +56,17 @@ export default {
     },
     onClickRemoveButton(id) {
       this.$emit('on-click-remove-button', id);
+    },
+    onClickClearAllButton() {
+      this.$emit('on-click-clear-all-button');
+    },
+    onClickOption() {
+      this.$refs.selectBox.blur();
+    }
+  },
+  computed: {
+    isEmpty() {
+      return this.tasks.length === 0;
     }
   }
 }
@@ -61,6 +76,7 @@ export default {
 .todo-list {
   background-color: rgba(242, 242, 242, 1);
   padding: 24px 60px;
+
   &__function-area {
     display: flex;
     justify-content: space-between;
@@ -89,13 +105,24 @@ export default {
           background-color: rgba(42, 130, 250, 0.1);
           color: #2A82F0;
         }
+        -webkit-appearance: menulist-button;
+        height: 40px;
       }
     }
 
     &__clear {
-      padding: 11px 0;
+      width: 80px;
+      height: 40px;
+      padding: 12px 10px 10px 10px;
       line-height: 18px;
       font-family: Roboto, sans-serif;
+      user-select: none;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.08);
+        cursor: pointer;
+        border-radius: 4px;
+      }
     }
   }
 
