@@ -48,7 +48,6 @@ class TodoSpringDataService implements TodoService {
     public Task modify(final TodoModifyAttributes attributes) {
         final var now = clock.instant();
         final var asIs = taskRepository.findById(attributes.getId());
-
         if (asIs.isEmpty()) {
             throw new RuntimeException("invalid id");
         }
@@ -65,7 +64,7 @@ class TodoSpringDataService implements TodoService {
 
     @Override
     public void delete(final int id) {
-        throw new RuntimeException("not implement");
+        taskRepository.deleteById(id);
     }
 
     private static Task fromEntity(final TaskEntity entity) {
